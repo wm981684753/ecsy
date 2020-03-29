@@ -1,0 +1,26 @@
+<form class="layui-form layui-card" action="{:request()->url()}" data-auto="true" method="post" autocomplete="off">
+        <div class="layui-card-body">
+            <div class="layui-form-item">
+                <label class="layui-form-label label-required">等级名称</label>
+                <div class="layui-input-block">
+                    <input name="name" required placeholder="请输入等级名称" class="layui-input">
+                    <input type="hidden" name="_csrf_" value="{:systoken('admin/users/add_level')}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label label-required">刷单数量</label>
+                <div class="layui-input-block">
+                    <input name="order_num" required placeholder="请输入刷单数量" class="layui-input">
+                </div>
+            </div>
+        </div>
+    
+        <div class="hr-line-dashed"></div>
+    
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type='submit'>提交</button>
+            <button class="layui-btn layui-btn-danger" type='button' data-close>取消</button>
+        </div>
+    
+    </form>
+    

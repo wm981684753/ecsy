@@ -1,0 +1,279 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="__ROOT__/public/css/style.css">
+
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/statics/css/hui.css">
+    <link href="__PUBLIC__/statics/css/userstyle.css" rel="stylesheet" type="text/css">
+    <script src="__ROOT__/static/plugs/jquery/jquery.min.js"></script>
+    <script src="__ROOT__/static/plugs/layui/layui.all.js"></script>
+    <script src="__ROOT__/static/plugs/require/require.js"></script>
+    <script src="__ROOT__/static/admin.js"></script>
+    <script src="__ROOT__/public/js/common.js"></script>
+
+    <style type="text/css">
+
+        body{font-size: 13px}
+        .aui-palace a{
+
+            margin-bottom:2rem;
+
+        }
+        .aui-take-head{height:170px}
+
+
+
+        .wrap-flex-row {
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .mytool .openvip {
+            position: relative;
+            width: 48%;
+            background: #fcd66b;
+            background: linear-gradient(90deg,#ffe8bf,#fcd66b);
+            color: #bf9955;
+            border-radius: 2vw;
+            margin: 3vw 0;
+        }
+        .mytool .text {
+             margin: 5vw 3vw;  font-size: 12px;
+         }
+        .mytool .text span {
+             font-size: 12px;
+         }
+        .mytool .sharefriend {
+            position: relative;
+            width: 48%;
+            background: #fcd66b;
+            background: linear-gradient(90deg,#cddcff,#5f97fc);
+            color: #5a92d1;
+            border-radius: 2vw;
+            margin: 3vw 0;
+        }
+        .mytool .corner {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 8vw;
+            width:auto;
+        }
+        .aui-flex-three{padding: 1.0rem;margin-bottom: 0}
+
+        *{font-size: 12px}
+        .aui-palace-grid-text h2{font-size: 12px}
+        .aui-take-button button{font-size: 12px;padding:5px 10px}
+        .aui-palace-grid{width:25%}
+    </style>
+</head>
+<body>
+<header>
+    <span>我的</span>
+</header>
+<section class="aui-flexView" style="margin-top: 40px">
+
+    <section class="aui-scrollView">
+        <div class="aui-take-head">
+            <div class="aui-flex aui-flex-one">
+                <div class="aui-take-user">
+                    <img src="{$info.headpic}" alt="" onerror="this.src='__ROOT__/public/img/head.png'">
+                </div>
+                <div class="aui-flex-box">
+					<span>
+						<i class="icon icon-phone"></i>{$info.tel}</span>
+                </div>
+                <div class="aui-take-button my_data">
+                    <button data-copy="{$info.invite_code}" class="level level2"><i class="icon icon-pic"></i>邀请码：{$info.invite_code}</button>
+                </div>
+            </div>
+            <div class="aui-flex aui-flex-two">
+                <div class="aui-flex-box">
+
+                    <h3><span><img src="__PUBLIC__/statics/img/8.png">{$level_name}</span></h3>
+                </div>
+                <a href="javascript:void(0)" style="display:none">
+                    <div class="aui-go-button">
+                        <button>立即开通</button>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+
+        <div class="aui-flex aui-flex-three">
+            <div class="aui-flex-box aui-flex-box-info">
+                <h4>余额(元)<br><em>{$info.balance}</em></h4>
+            </div>
+            <div class="aui-flex-box">
+                <h4>冻结余额 <br><em>{$info.freeze_balance}</em></h4>
+            </div>
+        </div>
+
+        <div class="aui-take-item" style="background: none;margin:0 1rem">
+            <div class="mytool wrap-flex-row">
+                <a class="openvip goto" href="{:url('ctrl/junior')}">
+                    <div class="text wrap-flex-column">我的团队
+                        <span>躺着也有收益</span>
+                    </div>
+                    <img src="__PUBLIC__/statics/img/vip-jb.png" class="corner">
+                </a>
+                <a class="sharefriend goto" href="{:url('my/invite')}">
+                    <div class="text wrap-flex-column">
+                        邀请好友
+                        <span>有钱一起赚</span>
+                    </div>
+                    <img src="__PUBLIC__/statics/img/yq-jb.png" class="corner">
+                </a>
+            </div>
+        </div>
+
+        <div class="aui-take-item" style="margin-top: 0">
+            <div class="aui-flex">
+                <div class="aui-flex-box">
+                    <h1>常用功能</h1>
+                </div>
+
+            </div>
+            <div class="aui-palace">
+                <?php
+                if($info['show_td']){
+                ?>
+
+                <a href="{:url('ctrl/junior2')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/zs.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>我的团队</h2>
+                    </div>
+                </a>
+                <?php
+                }
+                ?>
+                <a href="{:url('ctrl/wallet')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/qb.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>我的钱包</h2>
+                    </div>
+                </a>
+
+                <a href="{:url('ctrl/my_data')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/gr.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>个人资料</h2>
+                    </div>
+                </a>
+                <a href="{:url('ctrl/recharge_admin')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/cz.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>充值管理</h2>
+                    </div>
+                </a>
+
+
+
+                <a href="{:url('ctrl/deposit_admin')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/tx.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>提现</h2>
+                    </div>
+                </a>
+
+
+
+                <a href="{:url('ctrl/team_bgk')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/yq.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>团队佣金</h2>
+                    </div>
+                </a>
+                <a href="{:url('ctrl/receive_site')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/dz.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>地址管理</h2>
+                    </div>
+                </a>
+                <a href="{:url('ctrl/set')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/set.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>设置</h2>
+                    </div>
+                </a>
+
+                <a href="{:url('ctrl/bank')}" class="aui-palace-grid">
+                    <div class="aui-palace-grid-icon">
+                        <img src="__ROOT__/public/img/set.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text">
+                        <h2>银行卡绑定</h2>
+                    </div>
+                </a>
+
+                <a href="javascript:void(0)" id="exit" class="aui-palace-grid" style="width: 80%;margin-left:10%;text-align: center;
+                border:1px solid red;background: #fc486d;-webkit-border-radius:5px ;-moz-border-radius:5px ;border-radius: 5px;">
+                    <div class="aui-palace-grid-icon" style="display: inline-block;">
+                        <img src="__ROOT__/public/img/tc.png" alt="">
+                    </div>
+                    <div class="aui-palace-grid-text" style="display: inline-block;position: relative;top: -6px;color:#fff">
+                        <h2 style="color: #fff">退出</h2>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        <div style="height:0px;"></div>
+    </section>
+</section>
+
+<div class="hui-fooer-line"></div>
+
+{include file="public/floor" /}
+
+
+
+
+<script>
+    $(function() {
+        $('#hui-footer a').eq(3).addClass("floor-active")
+    })
+
+    $("#exit").click(function(){
+        layer.open({
+            content: '确定退出登录吗？'
+            , btn: ['确定','取消'],
+            shadeClose: false
+            , yes: function (index) {
+                location.href="{:url('user/logout')}"
+            },
+            no:function(){
+                layer.close();
+            }
+        });
+    })
+</script>
+</body>
+</html>

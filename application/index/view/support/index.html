@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		
+ <link rel="stylesheet" type="text/css" href="__PUBLIC__/statics/css/hui.css">
+  
+    
+   
+		<link rel="stylesheet" href="__ROOT__/static/theme/css/style.css" />
+	</head>
+	<body style="background-color: #FFFFFF;">
+		<div class="kefu_toubu">
+			<div class="kefu_toubuz">
+				<div class="img1"><a href="javascript:history.back(-1)"><img src="__ROOT__/static/theme/img/changyongicon-.png"/></a></div>
+				<div class="sp1">
+					<span>客服</span>
+				</div>
+				<div class="lxwm" style="overflow:hidden;">
+					<p style="color:#ffffff">联系我们</p>
+					<p style=" color:#ffffff">您可以直接与客服联系，或者复制QQ号进入QQ，即可在线沟通客服</p>
+				</div>
+			</div>
+			
+		</div>
+		 {foreach $list as $key=>$vo}
+		<div class="lxkf">
+		<div class="lxkfz">
+			<img src="__ROOT__/static/theme/img/lianxikefu.png"/><span><a href="{$vo.wechat}">联系客服</a></span>
+		</div>
+			<div class="lxqq">
+				<img src="__ROOT__/static/theme/img/qq.png"/><span>QQ:{$vo.qq}</span>
+			</div>
+			
+		</div>
+		{/foreach}
+		<div class="kefu_bangz">
+			<p class="bzwd">|&nbsp;帮助文档</p>
+	
+			  {foreach $msg as $key=>$vo}
+				<div class="kefu_ptgg" style="margin-top: 12px;">
+				<a href="{:url('detail',array('id'=>$vo.id))}?id={$vo.id}" class="article-list">
+				<div class="kefu_ptggz">
+					<ul>
+						<li><span id="sp1">{$vo.title}</span>
+						<p id="p2"><?php  echo date('Y-m-d H:i:s', $vo['addtime']);  ?></p>							
+						</li>
+						<img class="img4" src="__ROOT__/static/theme/img/圆点小.png"/>
+				        <img class="img3" src="__ROOT__/static/theme/img/youjiankuohao.png"/>
+					</ul>
+				
+				</div>
+				</a>
+			</div>
+		
+			{/foreach}
+			
+		
+		
+		
+		</div>
+			
+	{include file="public/floor" /}
+			
+	</body>
+</html>

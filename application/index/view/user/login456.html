@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	   <script src="__ROOT__/static/plugs/jquery/jquery.min.js"></script>
+
+    <script src="__ROOT__/public/js/ui.js"></script>
+    <link rel="stylesheet" href="__ROOT__/public/css/ui.css">
+    <link rel="stylesheet" href="__ROOT__/public/js/layer_mobile/need/layer.css">
+    <script src="__ROOT__/public/js/layer_mobile/layer.js"></script>
+	 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="__ROOT__/static/theme/css/style.css"/>
+	</head>
+	<body style="background-color: #FFFFFF;">
+		<div class="denglu_tou">
+			<div class="cha">
+				<img src="__ROOT__/static/theme/img/fork.png" style="width: 30px;height: 30px;"/>
+			</div>
+		</div>
+		<div class="denglu_touxiang">
+			<div class="denglu_touxiangz">
+				<img src="__ROOT__/static/theme/img/touxiang.png"/>
+			</div>
+		</div>
+		<div class="denglu_shuru">
+			<div class="denglu_shuruz">
+				<ul>
+					<li><img src="__ROOT__/static/theme/img//shouji.png"/>
+					<input class="input1" type="text"name="tel" id="tel" placeholder="请输入你的手机号" /></li>
+					<li><img src="__ROOT__/static/theme/img//钥匙.png"/>
+					<input  class="input1" type="password" name="pwd" id="pwd" placeholder="请输入你的密码" />
+					<span class="hqyzm1" >|&nbsp;忘记密码</span></li>
+				</ul>
+			</div>
+		</div>
+		<div class="denglu_dibu">
+			<button class="but aui-form-button" id="login">登录</button>
+		</div>
+		<div class="xiaz1">
+				<span class="a1"><a href="">短信验证码登录</a></span>
+				<span class="a2"><a href="./register.html">新用户注册</a></span>
+			</div>
+			<div class="denglu_qt ">
+				<span >其他登录方式</span>			
+			</div>
+			<div class="denglu_qq">
+					<img src="__ROOT__/static/theme/img//微信.png"/>
+					<p><a href="#">微信登录</a></p>
+				</div>
+				<div class="denglu_weix">
+					<img src="__ROOT__/static/theme/img//QQ1.png"/>
+					<p><a href="#">QQ登录</a></p>		
+				</div>
+				<div class="denglu_didi">
+				<span>登录即代表您已经同意<font color="#EB5636">用户协议</font></span>	
+				</div>
+	</body>
+	<script type="text/javascript">
+
+        $("#login").click(function() {
+            var tel = $('#tel').val(),
+                pwd = $('#pwd').val();
+            if (tel == "") {
+                QS_toast.show("请输入账号", true)
+            }
+            else if (pwd == "") {
+                QS_toast.show("请输入密码", true)
+            } else {
+                $.ajax({
+                    url: "{:url('do_login')}",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: { tel:tel, pwd:pwd },
+                    success: function(res) {
+                        console.log(res)
+                        if(res.code==0){
+                            QS_toast.show(res.info,true)
+                            var timer = setTimeout(function(){
+							
+							window.clearInterval(timeId);
+							var i = 0;
+							//设置定时器（循环去执行）
+							var timeId = setInterval(function () {
+								i++;
+								console.log('定时运行：' + i + '次');
+
+								$.ajax({
+									url: "/index/crontab/freeze_order",
+									type: "POST",
+									processData: false,
+									contentType: false,
+									dataType: "JSON",
+									data: { tel:1, pwd:2 },
+									success: function(res) {
+
+									},
+									error: function(err) { console.log(err) }
+								})
+							}, 5000);
+		
+                                location.href="{:url('index/home')}"
+                            },1800)
+                            
+                        
+                        	
+                        }else{
+                           // QS_toast.show(res.info,true)
+                        }
+                    },
+                    error: function(err) { console.log(err) }
+                })
+            }
+
+        })
+    </script>
+</html>
