@@ -1,0 +1,104 @@
+{extend name='admin@main'}
+
+{block name="content"}
+
+
+<form onsubmit="return false;" id="GoodsForm" data-auto="true" method="post" class='layui-form layui-card' autocomplete="off">
+
+    <div class="layui-card-body think-box-shadow padding-left-40">
+
+        <div class="layui-form-item layui-row layui-col-space15">
+
+            <label class="layui-col-xs9 relative">
+                <span class="color-green">弹窗标题</span>
+                <input name="title" id="title" class="layui-input" value="{$eject.title}" placeholder="请输入公告标题">
+                <input type="hidden" name="id" id="id" value="{$eject.id}">
+            </label>
+        </div>
+
+        <div class="layui-form-item block">
+            <label class="layui-col-xs9 relative">
+                <span class="label-required-prev color-green" style="">弹窗内容</span>
+                <textarea name="content" id="content" class="layui-input" style="display: block;height: 250px;resize:none">{$eject.content}</textarea>
+            </label>
+        </div>
+
+        <div class="layui-form-item block">
+            <label class="layui-col-xs9 relative">
+                <span class="label-required-prev color-green" style="">开启状态</span>
+                <select name='pid' id="status" class='layui-select full-width' style="display:block;width: 100px !important;" lay-ignore>
+                    <option value="0" {if $eject.status ==0 }selected{/if}>关闭</option>
+                    <option value="1" {if $eject.status ==1 }selected{/if}>开启</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type="button" onclick="update_eject()">确认编辑</button>
+            <button class="layui-btn layui-btn-danger" ng-click="hsitoryBack()" type="button">取消编辑</button>
+        </div>
+
+    </div>
+</form>
+{/block}
+
+{block name='script'}
+<script>
+    window.form.render();
+    require(['ckeditor', 'angular'], function () {
+        var app = angular.module("GoodsForm", []).run(callback);
+        angular.bootstrap(document.getElementById(app.name), [app.name]);
+
+        function callback($rootScope) {
+            // 返回商品列表
+            $rootScope.hsitoryBack = function () {
+                $.msg.confirm('确定要取消编辑吗？', function (index) {
+                    history.back(), $.msg.close(index);
+                });
+            };
+        }
+    })
+
+    //提交
+    function update_eject() {
+        var title=$('#title').val(),
+            content=$('#content').val(),
+            status=$('#status').val(),
+            id=$('#id').val();
+
+        if(title.length==0) {
+            layer.tips('标题不能为空', '#title');
+            return false;
+        }
+        if(content.length==0) {
+            layer.tips('内容不能为空', '#content');
+            return false;
+        }
+        if(status.length==0) {
+            layer.tips('请选择状态', '#status');
+            return false;
+        }
+
+        $.post(
+            'admin/help/update_eject',
+            {
+                title:title,
+                content:content,
+                status:status,
+                id:id
+            },
+            function (res) {
+                if(res==1){
+                    layer.msg('信息修改成功！', {icon: 1,time: 2000,end:function(){
+                            history.back()
+                        }});
+                }else if(res==0){
+                    layer.msg('信息未修改！', {icon: 0});
+                }else{
+                    layer.msg('信息修改失败！', {icon: 5});
+                }
+            }
+        )
+    }
+</script>
+{/block}

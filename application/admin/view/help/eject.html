@@ -1,0 +1,33 @@
+{extend name='main'}
+
+{block name="content"}
+
+<div class="think-box-shadow">
+
+    <table class="layui-table margin-top-15" lay-skin="line">
+        <thead>
+        <tr>
+            <th class='text-left nowrap'>弹窗标题</th>
+            <th class='text-left nowrap'>弹窗内容</th>
+            <th class='text-left nowrap'>状态</th>
+            <th class='text-left nowrap'>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class='text-left nowrap'>{$eject.title}</td>
+            <td class='text-left nowrap'>{$eject.content}</td>
+            {if $eject.status==1}
+            <td class='text-left nowrap' style="color: #00FFFF">开启</td>
+            {else}
+            <td class='text-left nowrap' style="color: red">关闭</td>
+            {/if}
+            <td class='text-left nowrap'>
+                <a class="layui-btn layui-btn-xs layui-btn" data-open="{:url('edit_eject',['id'=>$eject.id])}" data-value="id#{$eject.id}" style='background:green;'>编辑</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+{/block}

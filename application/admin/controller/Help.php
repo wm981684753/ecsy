@@ -236,5 +236,37 @@ class Help extends Controller
             $this->error('删除失败!');
     }
 
+    /**
+     * 前台首页弹窗内容管理
+     * @author weiming
+     * @version add by weiming 2020-03-29
+     * @return View eject.html
+    */
+    public function eject(){
+        $eject = Db::table('xy_eject')->find();
+        if($eject!=null) $eject['content'] = mb_substr($eject['content'],0,'20');
+        $this->assign('eject',$eject);
+        return $this->fetch();
+    }
+
+    /**
+     * 前台首页弹窗内容编辑
+     * @author weiming
+     * @version add by weiming 2020-03-29
+     * @return View edit_eject.html
+     */
+    public function edit_eject(){
+        $eject = Db::table('xy_eject')->find();
+        $this->assign('eject',$eject);
+        return $this->fetch();
+    }
+
+    public function update_eject(){
+        $data = $this->request->param();
+        if($data['id']=='') return false;
+        $result = Db::table('xy_eject')->where('id',$data['id'])->update(['title'=>$data['title'],'content'=>$data['content'],'status'=>$data['status']]);
+        return $result;
+    }
+
 
 }

@@ -19,6 +19,7 @@
             <th class='text-left nowrap'>分类ID</th>
             <th class='text-left nowrap'>分类名称</th>
             <th class='text-left nowrap'>比例</th>
+            <th class='text-left nowrap'>限制金额</th>
             <th class='text-left nowrap'>简介</th>
             <th class='text-left nowrap'>添加时间</th>
             <th class='text-left nowrap'>状态</th>
@@ -30,7 +31,8 @@
         <tr>
             <td class='text-left nowrap'>{$vo.id}</td>
             <td class='text-left nowrap'>{$vo.name}</td>
-            <td class='text-left nowrap'>¥{$vo.bili}</td>
+            <td class='text-left nowrap'>{$vo.bili}</td>
+            <td class='text-left nowrap'>{$vo.limit_money}</td>
             <td class='text-left nowrap'>{$vo.cate_info}</td>
             <td class='text-left nowrap'>
                 {$vo.addtime|format_datetime}

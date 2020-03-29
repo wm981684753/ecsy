@@ -254,6 +254,35 @@
 　　var num = Math.floor(Math.random()*(m - n) + n);
 	}
 	sum(1,100);
+
+    //金额获得焦点
+    $('#user_num').focus(function () {
+        //去掉百分小数
+        var money = $('#user_num').val();
+        if(money>0){
+            var num = money.split('.');
+            if(num.length>=2){
+                if(num[1].substring(0,1)!=0){
+                    $('#user_num').val(num[0]+'.'+num[1].substring(0,1))
+                }else{
+                    $('#user_num').val(num[0])
+                }
+            }
+        }
+    })
+
+    //金额失去焦点
+    $('#user_num').blur(function () {
+        //添加随机小数点
+        var money = $('#user_num').val();
+        if(money>0){
+            var num = money.split('.');
+            if(num.length==1){
+                $('#user_num').val(num[0]+'.0'+parseInt(9*Math.random()))
+            }
+        }
+    })
+
     // 提交资料
     $('.btn').click(function() {
 	

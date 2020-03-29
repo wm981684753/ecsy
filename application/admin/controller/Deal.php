@@ -206,9 +206,10 @@ class Deal extends Controller
             $this->applyCsrfToken();//验证令牌
             $name      = input('post.name/s','');
             $bili     = input('post.bili/s','');
+            $limit_money     = input('post.limit_money/s','');
             $info    = input('post.cate_info/s','');
 
-            $res = $this->submit_cate($name,$bili,$info,0);
+            $res = $this->submit_cate($name,$bili,$limit_money,$info,0);
             if($res['code']===0)
                 return $this->success($res['info'],'/admin.html#/admin/deal/goods_cate.html');
             else
@@ -229,14 +230,16 @@ class Deal extends Controller
      * @param string $id 传参则更新数据,不传则写入数据
      * @return array
      */
-    public function submit_cate($name,$bili,$info,$id)
+    public function submit_cate($name,$bili,$limit_money,$info,$id)
     {
         if(!$name) return ['code'=>1,'info'=>('请输入分类名称')];
         if(!$bili) return ['code'=>1,'info'=>('请输入比例')];
+        if(!$limit_money) return ['code'=>1,'info'=>('请输入限制金额')];
 
         $data = [
             'name'     => $name,
             'bili'    => $bili,
+            'limit_money' => $limit_money,
             'cate_info'   => $info,
             'addtime'       => time()
         ];
@@ -292,9 +295,10 @@ class Deal extends Controller
             $this->applyCsrfToken();//验证令牌
             $name      = input('post.name/s','');
             $bili     = input('post.bili/s','');
+            $limit_money     = input('post.limit_money/s','');
             $info    = input('post.cate_info/s','');
 
-            $res = $this->submit_cate($name,$bili,$info,$id);
+            $res = $this->submit_cate($name,$bili,$limit_money,$info,$id);
             if($res['code']===0)
                 return $this->success($res['info'],'/admin.html#/admin/deal/goods_cate.html');
             else
